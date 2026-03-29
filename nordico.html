@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario Nórdico de Kuorinka</title>
+    <style>
+        :root {
+            --primary: #1e40af;
+            --secondary: #3b82f6;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --border: #cbd5e1;
+        }
+
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 15px; font-size: 13px; }
+        .container { max-width: 1300px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+        
+        header { border-bottom: 3px solid var(--primary); margin-bottom: 20px; text-align: center; }
+        h1 { font-size: 22px; color: var(--primary); margin-bottom: 5px; }
+        
+        
+        table { width: 100%; border-collapse: collapse; margin-bottom: 5px; background: white; }
+        th, td { border: 1px solid var(--border); padding: 6px; text-align: center; }
+        th { background: #f1f5f9; font-weight: 700; font-size: 11px; }
+        .zona-label { text-align: left; font-weight: bold; width: 160px; background: #f8fafc; font-size: 12px; }
+
+        .btn-analizar { width: 100%; padding: 20px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin: 30px 0; transition: 0.3s; }
+        .btn-analizar:hover { background: #1e3a8a; transform: translateY(-2px); }
+
+        .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { padding: 20px; border-radius: 8px; border: 1px solid var(--border); background: #fff; }
+        .ai-card { border-left: 8px solid var(--primary); background: #eff6ff; }
+
+        select, input[type="radio"] { cursor: pointer; }
+        .badge { padding: 2px 8px; border-radius: 10px; color: white; font-weight: bold; font-size: 10px; }
+        .crit { background: #dc2626; }
+        .warn { background: #f59e0b; }
+.btn-regresar:hover {
+    background-color: var(--primary-blue);
+    color: white;
+
+}
+
+
+        .btn-metodos {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ffffff;
+            color: #002060;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #002060;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            margin-top: 25px;
+        }
+        .btn-metodos:hover { background-color: #002060; color: #ffffff; }
+}
+
+    </style>
+</head>
+<body>
+<a href="diagnosticos.html" class="btn-regresar">← VOLVER AL INICIO</a>
+
+<div class="container">
+    <header>
+        <h1>Cuestionario Nórdico de Kuorinka</h1>
+            </header>
+
+    <script>
+        const regiones = ["Cuello", "Hombro", "Espalda (zona dorsal)", "Espalda (zona lumbar)", "Brazo", "Codo", "Antebrazo", "Mano/ Muñeca", "Pierna", "Rodilla", "Pantorrilla", "Pie"];
+    </script>
+
+    <h2> Molestias y Lateralidad</h2>
+    <table>
+        <thead>
+            <tr><th>Región</th><th>No</th><th>Izquierdo</th><th>Derecho</th><th>Ambos</th></tr>
+        </thead>
+        <tbody>
+            <script>
+                regiones.forEach(r => document.write(`<tr><td class="zona-label">${r}</td>
+                    <td><input type="radio" name="p5_${r}" value="0" checked></td>
+                    <td><input type="radio" name="p5_${r}" value="I"></td>
+                    <td><input type="radio" name="p5_${r}" value="D"></td>
+                    <td><input type="radio" name="p5_${r}" value="A"></td>
+                </tr>`));
+            </script>
+        </tbody>
+    </table>
+
+    <h2>Duración, Frecuencia e Impedimento</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Región</th>
+                <th> Tiempo total</th>
+                <th>En últimos 12 meses</th>
+                <th> Dura cada episodio</th>
+                <th> Impidió trabajar (12m)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <script>
+                regiones.forEach(r => document.write(`<tr><td class="zona-label">${r}</td>
+                    <td><select id="p6_${r}"><option value="0">Nunca</option><option value="7">1-7 d</option><option value="15">8-15 d</option><option value="30">16-30 d</option><option value="99">Siempre</option></select></td>
+                    <td><select id="p9_${r}"><option value="0">0 d</option><option value="7">1-7 d</option><option value="30">8-30 d</option><option value="99">>30 d</option></select></td>
+                    <td><select id="p10_${r}"><option value="0">N/A</option><option value="1">Horas</option><option value="7">Días</option><option value="30">Semanas</option></select></td>
+                    <td><select id="p11_${r}"><option value="0">Nunca</option><option value="7">1-7 d</option><option value="30">8-30 d</option><option value="99">>30 d</option></select></td>
+                </tr>`));
+            </script>
+        </tbody>
+    </table>
+
+    <h2>. Cambios, Frecuencia y Tratamiento</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Región</th>
+                <th>¿Cambió puesto?</th>
+                <th> ¿Molestias 12 meses?</th>
+                <th> ¿Recibió tratamiento?</th>
+                <th> ¿Molestias últimos 7 días?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <script>
+                regiones.forEach(r => document.write(`<tr><td class="zona-label">${r}</td>
+                    <td><input type="checkbox" id="p7_${r}"></td>
+                    <td><input type="checkbox" id="p8_${r}"></td>
+                    <td><input type="checkbox" id="p12_${r}"></td>
+                    <td><input type="checkbox" id="p13_${r}"></td>
+                </tr>`));
+            </script>
+        </tbody>
+    </table>
+
+    <h2> Calificación  y Atribución</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Región</th>
+                <th> Calificación (1-5)</th>
+                <th> Posturas</th>
+                <th> Repetición</th>
+                <th> Cargas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <script>
+                regiones.forEach(r => document.write(`<tr><td class="zona-label">${r}</td>
+                    <td><select id="p14_${r}"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td>
+                    <td><input type="checkbox" class="attr" data-f="postura" data-r="${r}"></td>
+                    <td><input type="checkbox" class="attr" data-f="repetitivo" data-r="${r}"></td>
+                    <td><input type="checkbox" class="attr" data-f="carga" data-r="${r}"></td>
+                </tr>`));
+            </script>
+        </tbody>
+    </table>
+
+    <button class="btn-analizar" onclick="analizarTodo()">EJECUTAR ANÁLISIS </button>
+
+    <div class="results-grid">
+        <div class="card">
+            <h3 style="margin-top:0">Hallazgos Detectados</h3>
+            <div id="resumenReporte">Sin datos registrados.</div>
+        </div>
+        <div class="card ai-card">
+            <h3 style="margin-top:0">Diagnóstico y Método</h3>
+            <div id="diagnosticoIA">Complete el cuestionario.</div>
+        </div>
+    </div>
+ <a href="metodos.html" class="btn-metodos">MÉTODOS ERGONÓMICOS</a>
+
+</div>
+
+<script>
+    function analizarTodo() {
+        let htmlResumen = "";
+        let flags = { carga: 0, postura: 0, repetitivo: 0, severo: false };
+        let zonaCritica = "";
+
+        regiones.forEach(r => {
+            const lat = document.querySelector(`input[name="p5_${r}"]:checked`).value;
+            const p11 = document.getElementById(`p11_${r}`).value;
+            const p13 = document.getElementById(`p13_${r}`).checked;
+            const p14 = document.getElementById(`p14_${r}`).value;
+
+            if (lat !== "0" || p13) {
+                let nivel = p14 >= 4 || p11 !== "0" ? "crit" : "warn";
+                if (nivel === "crit") { flags.severo = true; zonaCritica = r; }
+
+                htmlResumen += `<div style="border-bottom:1px solid #eee; padding:5px 0;">
+                    <strong>${r}:</strong> <span class="badge ${nivel}">${p14 >= 4 ? 'MUY FUERTE' : 'MODERADA'}</span><br>
+                    <small>Lateralidad: ${lat} | ¿7 días?: ${p13?'Sí':'No'} | Impedimento: ${p11} d</small>
+                </div>`;
+            }
+        });
+
+        flags.postura = document.querySelectorAll('input[data-f="postura"]:checked').length;
+        flags.repetitivo = document.querySelectorAll('input[data-f="repetitivo"]:checked').length;
+        flags.carga = document.querySelectorAll('input[data-f="carga"]:checked').length;
+
+        document.getElementById('resumenReporte').innerHTML = htmlResumen || "No se detectaron molestias.";
+
+        let metodo = "";
+        let razon = "";
+
+        if (flags.carga > 0 || zonaCritica.includes("lumbar")) {
+            metodo = "GINSHT / ECUACIÓN DE NIOSH";
+            razon = "Se detectan molestias lumbares vinculadas a manejo de cargas.";
+        } else if (flags.repetitivo > 0 || zonaCritica.includes("Muñeca") || zonaCritica.includes("Codo")) {
+            metodo = "JSI (Job Strain Index) / OCRA";
+            razon = "Síntomas en extremidades superiores vinculados a repetitividad.";
+        } else if (flags.postura > 0 || zonaCritica.includes("Cuello") || zonaCritica.includes("Hombro")) {
+            metodo = "MÉTODO RULA";
+            razon = "Síntomas en segmento superior atribuidos a posturas forzadas.";
+        } else if (flags.severo) {
+            metodo = "MÉTODO REBA";
+            razon = "Sintomatología severa multizonal de cuerpo entero.";
+        } else {
+            metodo = "MÉTODO LEST / CHECKLIST";
+            razon = "Molestias leves o dispersas; requiere revisión general.";
+        }
+
+        document.getElementById('diagnosticoIA').innerHTML = `
+            <div style="font-size:20px; font-weight:800; color:var(--primary);">${metodo}</div>
+            <p style="margin-top:10px;">${razon}</p>
+        `;
+    }
+</script>
+
+</body>
+</html>

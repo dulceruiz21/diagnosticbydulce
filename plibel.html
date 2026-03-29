@@ -1,0 +1,390 @@
+<<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Plibel</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2b6cb0;
+            --accent: #3182ce;
+            --danger: #e53e3e;
+            --warning: #dd6b20;
+            --success: #38a169;
+            --bg: #f7fafc;
+            --border: #e2e8f0;
+            --na: #edf2f7;
+        }
+
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #2d3748; line-height: 1.5; }
+        .container { max-width: 1400px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        
+        header { text-align: center; border-bottom: 4px solid var(--primary); margin-bottom: 25px; padding-bottom: 15px; }
+        h1 { color: var(--primary); margin: 0; font-size: 24px; text-transform: uppercase; }
+
+        .instrucciones { background: #ebf8ff; border-left: 5px solid var(--secondary); padding: 20px; margin-bottom: 25px; border-radius: 0 8px 8px 0; }
+        .instrucciones h3 { margin-top: 0; color: var(--primary); font-size: 16px; }
+
+        .plibel-table { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 30px; }
+        .plibel-table th, .plibel-table td { border: 1px solid var(--border); padding: 8px; text-align: center; vertical-align: middle; }
+        .plibel-table th { background: var(--primary); color: white; text-transform: uppercase; font-size: 10px; height: 50px; }
+        .q-text { text-align: left !important; width: 30%; background: #fcfcfc; font-weight: 600; font-size: 12px; }
+        .na { background-color: var(--na); }
+
+        .sub-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
+        .sub-item { display: inline-flex; align-items: center; gap: 2px; background: #fff; border: 1px solid #cbd5e0; padding: 2px 5px; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        .sub-item:hover { border-color: var(--secondary); }
+        .sub-item input { margin: 0; cursor: pointer; }
+
+        .extra-section { background: #fff; border: 2px solid var(--primary); padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+        .extra-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; }
+        .extra-section h3 { margin-top: 0; font-size: 16px; color: var(--primary); }
+
+        .analysis-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { padding: 25px; border-radius: 10px; border: 1px solid var(--border); background: white; }
+        .ai-card { border: 2px solid var(--secondary); background: #f0f9ff; }
+        
+        .badge { padding: 4px 10px; border-radius: 20px; color: white; font-weight: bold; font-size: 10px; text-transform: uppercase; }
+        .high { background: var(--danger); }
+        .med { background: var(--warning); }
+        .low { background: var(--success); }
+
+        .rec-box { background: white; padding: 15px; border-radius: 8px; border-left: 5px solid var(--secondary); margin-top: 15px; }
+        .method-tag { color: var(--primary); font-weight: bold; font-size: 18px; display: block; margin-top: 5px; }
+
+        .btn-main { width: 100%; padding: 20px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-bottom: 20px; }
+        .btn-main:hover { background: var(--secondary); transform: translateY(-2px); }
+
+        @media print { .btn-main, .instrucciones { display: none; } }
+.btn-regresar {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.btn-regresar:hover {
+    background-color: var(--primary-blue);
+    color: white;
+
+}
+
+
+
+
+        .btn-metodos {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ffffff;
+            color: #002060;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #002060;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            margin-top: 25px;
+        }
+        .btn-metodos:hover { background-color: #002060; color: #ffffff; }
+}
+
+    </style>
+</head>
+<body>
+<a href="diagnosticos.html" class="btn-regresar">← VOLVER AL INICIO</a>
+
+<div class="container">
+    <header>
+        <h1>Método PLIBEL - Identificación de Factores de Riesgo Musculoesquelético</h1>
+    </header>
+
+    <div class="instrucciones">
+        <h3>Método de aplicación:</h3>
+        1- Encuentre la zona del cuerpo lesionada (columnas).<br>
+        2- Siga los campos blancos de la derecha.<br>
+        3- ¿El desempeño de la tarea contiene cualquiera de los factores descritos?<br>
+        4- Si es así, haga una marca en el correspondiente espacio.
+    </div>
+
+    <table class="plibel-table" id="plibelTable">
+        <thead>
+            <tr>
+                <th>Factores de Riesgo</th>
+                <th>Cuello, Hombros, Espalda Sup.</th>
+                <th>Codo, Antebrazo y Manos</th>
+                <th>Pies</th>
+                <th>Rodillas y Caderas</th>
+                <th>Espalda Baja</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="q-text">1. Superficie desigual, inclinada o resbaladiza</td>
+                <td class="na"></td><td class="na"></td>
+                <td><input type="checkbox" data-zona="pies"></td>
+                <td><input type="checkbox" data-zona="rodillas"></td>
+                <td><input type="checkbox" data-zona="espalda"></td>
+            </tr>
+            <tr>
+                <td class="q-text">2. Espacio de trabajo limitado para movimientos</td>
+                <td><input type="checkbox" data-zona="cuello"></td>
+                <td><input type="checkbox" data-zona="manos"></td>
+                <td><input type="checkbox" data-zona="pies"></td>
+                <td><input type="checkbox" data-zona="rodillas"></td>
+                <td><input type="checkbox" data-zona="espalda"></td>
+            </tr>
+            <tr>
+                <td class="q-text">3. Herramientas o equipos inadecuadamente diseñados</td>
+                <td><input type="checkbox" data-zona="cuello"></td>
+                <td><input type="checkbox" data-zona="manos"></td>
+                <td><input type="checkbox" data-zona="pies"></td>
+                <td><input type="checkbox" data-zona="rodillas"></td>
+                <td><input type="checkbox" data-zona="espalda"></td>
+            </tr>
+            <tr>
+                <td class="q-text">4. Altura de trabajo incorrectamente ajustada</td>
+                <td><input type="checkbox" data-zona="cuello"></td>
+                <td class="na"></td><td class="na"></td><td class="na"></td>
+                <td><input type="checkbox" data-zona="espalda"></td>
+            </tr>
+            <tr>
+                <td class="q-text">5. Silla de trabajo pobremente diseñada/mal ajustada</td>
+                <td><input type="checkbox" data-zona="cuello"></td>
+                <td class="na"></td><td class="na"></td><td class="na"></td>
+                <td><input type="checkbox" data-zona="espalda"></td>
+            </tr>
+            <tr>
+                <td class="q-text">6. Trabajo en posición de pie sin posibilidad de sentarse</td>
+                <td class="na"></td><td class="na"></td>
+                <td><input type="checkbox" data-zona="pies"></td>
+                <td><input type="checkbox" data-zona="rodillas"></td>
+                <td><input type="checkbox" data-zona="espalda"></td>
+            </tr>
+            <tr>
+                <td class="q-text">7. Operación de pedales fatigante</td>
+                <td class="na"></td><td class="na"></td>
+                <td><input type="checkbox" data-zona="pies"></td>
+                <td><input type="checkbox" data-zona="rodillas"></td>
+                <td class="na"></td>
+            </tr>
+            <tr>
+                <td class="q-text">8. Trabajo fatigante para miembros inferiores (a:peldaños, b:cuclillas/brincos, c:una pierna)</td>
+                <td class="na"></td><td class="na"></td>
+                <td><div class="sub-container">
+                    <label class="sub-item">a<input type="checkbox" data-zona="pies"></label>
+                    <label class="sub-item">b<input type="checkbox" data-zona="pies"></label>
+                    <label class="sub-item">c<input type="checkbox" data-zona="pies"></label>
+                </div></td>
+                <td><div class="sub-container">
+                    <label class="sub-item">a<input type="checkbox" data-zona="rodillas"></label>
+                    <label class="sub-item">b<input type="checkbox" data-zona="rodillas"></label>
+                </div></td>
+                <td><div class="sub-container">
+                    <label class="sub-item">a<input type="checkbox" data-zona="espalda"></label>
+                    <label class="sub-item">b<input type="checkbox" data-zona="espalda"></label>
+                </div></td>
+            </tr>
+            <tr>
+                <td class="q-text">9. Espalda inclinada/torsión (a:med flex, b:sev flex, c:med tor, d:sev tor)</td>
+                <td><div class="sub-container">
+                    <label class="sub-item">a<input type="checkbox" data-zona="cuello"></label>
+                    <label class="sub-item">b<input type="checkbox" data-zona="cuello"></label>
+                    <label class="sub-item">c<input type="checkbox" data-zona="cuello"></label>
+                    <label class="sub-item">d<input type="checkbox" data-zona="cuello"></label>
+                </div></td>
+                <td class="na"></td><td class="na"></td><td class="na"></td>
+                <td><div class="sub-container">
+                    <label class="sub-item">a<input type="checkbox" data-zona="espalda" data-tipo="postura"></label>
+                    <label class="sub-item">b<input type="checkbox" data-zona="espalda" data-tipo="postura"></label>
+                    <label class="sub-item">c<input type="checkbox" data-zona="espalda" data-tipo="postura"></label>
+                    <label class="sub-item">d<input type="checkbox" data-zona="espalda" data-tipo="postura"></label>
+                </div></td>
+            </tr>
+            <tr>
+                <td class="q-text">10. Cuello en flexión/torsión (a:flex, b:sev flex, c:tor, d:extensión atrás)</td>
+                <td><div class="sub-container">
+                    <label class="sub-item">a<input type="checkbox" data-zona="cuello" data-tipo="postura"></label>
+                    <label class="sub-item">b<input type="checkbox" data-zona="cuello" data-tipo="postura"></label>
+                    <label class="sub-item">c<input type="checkbox" data-zona="cuello" data-tipo="postura"></label>
+                    <label class="sub-item">d<input type="checkbox" data-zona="cuello" data-tipo="postura"></label>
+                </div></td>
+                <td class="na"></td><td class="na"></td><td class="na"></td><td class="na"></td>
+            </tr>
+            <tr>
+                <td class="q-text">11. Levantamiento manual cargas (a:rep, b:peso, c:agarre, d:loc, e:ext, f:bajo rod, g:alto hom)</td>
+                <td><div class="sub-container">
+                    <label class="sub-item">a<input type="checkbox" data-zona="cuello"></label>
+                    <label class="sub-item">b<input type="checkbox" data-zona="cuello"></label>
+                    <label class="sub-item">c<input type="checkbox" data-zona="cuello"></label>
+                    <label class="sub-item">d<input type="checkbox" data-zona="cuello"></label>
+                </div></td>
+                <td class="na"></td><td class="na"></td><td class="na"></td>
+                <td><div class="sub-container">
+                    <label class="sub-item">a<input type="checkbox" data-zona="espalda" data-tipo="carga"></label>
+                    <label class="sub-item">b<input type="checkbox" data-zona="espalda" data-tipo="carga"></label>
+                    <label class="sub-item">d<input type="checkbox" data-zona="espalda" data-tipo="carga"></label>
+                    <label class="sub-item">e<input type="checkbox" data-zona="espalda" data-tipo="carga"></label>
+                    <label class="sub-item">f<input type="checkbox" data-zona="espalda" data-tipo="carga"></label>
+                    <label class="sub-item">g<input type="checkbox" data-zona="espalda" data-tipo="carga"></label>
+                </div></td>
+            </tr>
+            <tr>
+                <td class="q-text">12. Empujar o jalar repetidamente</td>
+                <td><input type="checkbox" data-zona="cuello"></td>
+                <td><input type="checkbox" data-zona="manos"></td>
+                <td class="na"></td><td class="na"></td>
+                <td><input type="checkbox" data-zona="espalda" data-tipo="fuerza"></td>
+            </tr>
+            <tr>
+                <td class="q-text">13. Brazo elevado o a un lado sin soporte</td>
+                <td><input type="checkbox" data-zona="cuello" data-tipo="postura"></td>
+                <td class="na"></td><td class="na"></td><td class="na"></td><td class="na"></td>
+            </tr>
+            <tr>
+                <td class="q-text">14. Movimientos repetitivos (a:similares, b:distancia incómoda)</td>
+                <td><div class="sub-container">
+                    <label class="sub-item">a<input type="checkbox" data-zona="cuello"></label>
+                    <label class="sub-item">b<input type="checkbox" data-zona="cuello"></label>
+                </div></td>
+                <td><div class="sub-container">
+                    <label class="sub-item">a<input type="checkbox" data-zona="manos" data-tipo="repetitivo"></label>
+                    <label class="sub-item">b<input type="checkbox" data-zona="manos" data-tipo="repetitivo"></label>
+                </div></td>
+                <td class="na"></td><td class="na"></td><td class="na"></td>
+            </tr>
+            <tr>
+                <td class="q-text">15. Peso o agarre de herramientas (a:peso, b:agarre incómodo)</td>
+                <td><div class="sub-container">
+                    <label class="sub-item">a<input type="checkbox" data-zona="cuello"></label>
+                    <label class="sub-item">b<input type="checkbox" data-zona="cuello"></label>
+                </div></td>
+                <td><div class="sub-container">
+                    <label class="sub-item">a<input type="checkbox" data-zona="manos" data-tipo="fuerza"></label>
+                    <label class="sub-item">b<input type="checkbox" data-zona="manos" data-tipo="fuerza"></label>
+                </div></td>
+                <td class="na"></td><td class="na"></td><td class="na"></td>
+            </tr>
+            <tr>
+                <td class="q-text">16. Alta demanda visual (fijación prolongada)</td>
+                <td><input type="checkbox" data-zona="cuello"></td>
+                <td class="na"></td><td class="na"></td><td class="na"></td><td class="na"></td>
+            </tr>
+            <tr>
+                <td class="q-text">17. Repetición antebrazos/manos (a:torsión, b:fuerza, c:posición inc, d:teclado)</td>
+                <td class="na"></td>
+                <td><div class="sub-container">
+                    <label class="sub-item">a<input type="checkbox" data-zona="manos" data-tipo="repetitivo"></label>
+                    <label class="sub-item">b<input type="checkbox" data-zona="manos" data-tipo="repetitivo"></label>
+                    <label class="sub-item">c<input type="checkbox" data-zona="manos" data-tipo="repetitivo"></label>
+                    <label class="sub-item">d<input type="checkbox" data-zona="manos" data-tipo="repetitivo"></label>
+                </div></td>
+                <td class="na"></td><td class="na"></td><td class="na"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="extra-section">
+        <h3>Tenga en consideración también los siguientes aspectos:</h3>
+        <div class="extra-grid">
+            <label><input type="checkbox" class="mod-check"> a. Posibilidad de tomar pausas o descansos</label>
+            <label><input type="checkbox" class="mod-check"> b. Posibilidad de ordenar tareas o ritmo</label>
+            <label><input type="checkbox" class="mod-check"> c. Trabajo bajo stress psicológico / demandas de tiempo</label>
+            <label><input type="checkbox" class="mod-check"> d. Situaciones no usuales o inesperadas</label>
+            <label><input type="checkbox" class="mod-check"> e. Presencia de frío, calor, ruido o reflejos</label>
+            <label><input type="checkbox" class="mod-check"> f. Presencia de tirones, sacudidas o vibraciones</label>
+        </div>
+    </div>
+
+    <button class="btn-main" onclick="ejecutarIA()">ANALIZAR RIESGOS Y GENERAR RECOMENDACIÓN</button>
+
+    <div class="analysis-panel">
+        <div class="card">
+            <h3 style="color:var(--primary)">Resumen de Puntos de Estrés</h3>
+            <div id="chartZonas">Esperando datos...</div>
+        </div>
+        <div class="card ai-card">
+            <h3 style="color:var(--secondary)">💡 Recomendación Ergonómica IA</h3>
+            <div id="aiResponse">Analice la tarea para obtener una sugerencia.</div>
+        </div>
+    </div>
+ <a href="metodos.html" class="btn-metodos">MÉTODOS ERGONÓMICOS</a>
+
+</div>
+
+<script>
+    function ejecutarIA() {
+        const zonas = {
+            cuello: document.querySelectorAll('input[data-zona="cuello"]:checked').length,
+            manos: document.querySelectorAll('input[data-zona="manos"]:checked').length,
+            pies: document.querySelectorAll('input[data-zona="pies"]:checked').length,
+            rodillas: document.querySelectorAll('input[data-zona="rodillas"]:checked').length,
+            espalda: document.querySelectorAll('input[data-zona="espalda"]:checked').length
+        };
+
+        const tipos = {
+            carga: document.querySelectorAll('input[data-tipo="carga"]:checked').length,
+            repetitivo: document.querySelectorAll('input[data-tipo="repetitivo"]:checked').length,
+            postura: document.querySelectorAll('input[data-tipo="postura"]:checked').length,
+            fuerza: document.querySelectorAll('input[data-tipo="fuerza"]:checked').length
+        };
+
+        // Renderizado de Resultados por Zona
+        let htmlZonas = "";
+        for (const [zona, total] of Object.entries(zonas)) {
+            let nivel = total > 4 ? "Alto" : (total > 1 ? "Medio" : "Bajo");
+            htmlZonas += `<p><strong>${zona.toUpperCase()}:</strong> ${total} marcas <span class="badge ${nivel}">${nivel}</span></p>`;
+        }
+        document.getElementById('chartZonas').innerHTML = htmlZonas;
+
+        // Lógica de recomendación de método
+        let metodo = "";
+        let descripcion = "";
+
+        if (tipos.carga > 0 && zonas.espalda > 2) {
+            metodo = "NIOSH / Liberty Mutual (Snook & Ciriello)";
+            descripcion = "Se han detectado factores críticos en el <strong>Manejo Manual de Cargas</strong>. Se requiere evaluar el Peso Máximo Recomendado y los límites de fuerza inicial/sostenida.";
+        } 
+        else if (zonas.manos > 3 && tipos.repetitivo > 1) {
+            metodo = "JSI (Job Strain Index) / OCRA / ART Tool";
+            descripcion = "Riesgo alto en <strong>extremidades superiores por repetitividad</strong>. Estos métodos analizarán la frecuencia de movimientos y los tiempos de recuperación.";
+        }
+        else if (zonas.cuello > 3 || tipos.postura > 3) {
+            metodo = "RULA (Rapid Upper Limb Assessment)";
+            rec = "Predominio de <strong>posturas forzadas en tronco y miembros superiores</strong>. Ideal para puestos de oficina o líneas de ensamblaje ligero.";
+        }
+        else if (zonas.rodillas > 1 || zonas.pies > 1) {
+            metodo = "REBA / OWAS";
+            descripcion = "Se identifican riesgos en <strong>miembros inferiores y posturas globales</strong>. REBA evaluará la carga postural dinámica de todo el cuerpo.";
+        }
+        else if (tipos.fuerza > 1) {
+            metodo = "RAPP Tool (Push/Pull Analysis)";
+            descripcion = "El factor de <strong>empuje y tracción</strong> es relevante. Se sugiere medir las fuerzas con dinamómetro y aplicar RAPP.";
+        }
+        else {
+            metodo = "Vigilancia de Salud / Pausas Activas";
+            descripcion = "El riesgo detectado es bajo o muy disperso. Se recomienda rotación de tareas y capacitación en higiene postural.";
+        }
+
+        document.getElementById('aiResponse').innerHTML = `
+            <div class="rec-box">
+                <span>En base a los datos, el método sugerido es:</span>
+                <span class="method-tag">${metodo}</span>
+                <p style="margin-top:10px; font-size:14px;">${descripcion}</p>
+            </div>
+            <p style="font-size:11px; color:#718096; margin-top:10px;">Otros métodos considerados: S.R, JSI/RSI, FCD, DSSPD, AMMA.</p>
+        `;
+    }
+</script>
+
+</body>
+</html>

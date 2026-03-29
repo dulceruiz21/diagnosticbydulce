@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>DIAGNÓSTICO</title>
+
+<style>
+
+body{
+font-family: Arial;
+background: linear-gradient(135deg,#dfe9f3,#ffffff);
+margin:0;
+padding:0;
+text-align:center;
+}
+
+header{
+background:#2c3e50;
+color:white;
+padding:20px;
+font-size:28px;
+}
+
+.contenedor{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+padding:50px;
+max-width:900px;
+margin:auto;
+}
+
+.tarjeta{
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+transition:0.3s;
+text-decoration:none;
+color:black;
+}
+
+.tarjeta:hover{
+transform:scale(1.05);
+box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+
+.icono{
+font-size:50px;
+margin-bottom:10px;
+}
+
+.nombre{
+font-size:20px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+Sistema de Evaluación Ergonómica
+</header>
+
+<div class="contenedor">
+
+<a class="tarjeta" href="lest.html">
+<div class="nombre"> LEST</div>
+</a>
+
+<a class="tarjeta" href="nordico.html">
+<div class="nombre">CUESTIONARIO NORDICO</div>
+</a>
+
+<a class="tarjeta" href="plibel.html">
+<div class="nombre">PLIBEL</div>
+</a>
+</div>
+
+</body>
+</html>
